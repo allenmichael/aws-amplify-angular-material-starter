@@ -1,0 +1,16 @@
+<div *ngIf="showConfirmSignInForm">
+  <form class="large-form" [formGroup]="confirmSignInForm">
+    <mat-form-field class="full-width-input" appearance="standard">
+      <input matInput formControlName="mfaCode" placeholder="Enter your MFA confirmation code">
+    </mat-form-field>
+    <mat-error *ngIf="errorMessage">
+      {{errorMessage}}
+    </mat-error>
+    <div class="push-right">
+      <button mat-button (click)="onConfirm()">Confirm Sign In</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="isSignedIn">
+  <p>You are currently signed in.</p>
+</div>

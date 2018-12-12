@@ -1,0 +1,17 @@
+<form class="large-form" [formGroup]="confirmSignUpForm">
+  <mat-form-field class="full-width-input" appearance="standard">
+    <input formControlName="username" type="text" matInput placeholder="Username" value="{{username}}" required>
+  </mat-form-field>
+  <mat-form-field class="full-width-input" appearance="standard">
+    <input matInput formControlName="code" placeholder="Enter your confirmation code">
+  </mat-form-field>
+  <mat-error *ngIf="errorMessage">
+    {{errorMessage}}
+  </mat-error>
+  <div>
+    <button (click)="onResend()" mat-button>Resend code</button>
+  </div>
+  <div class="push-right">
+    <button (click)="onConfirm()" mat-button>Confirm account</button>
+  </div>
+</form>

@@ -1,0 +1,69 @@
+<div>
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="usernameForm">
+      <form class="large-form" [formGroup]="usernameForm">
+        <ng-template matStepLabel>Pick a username</ng-template>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext type="button">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="emailForm">
+      <form class="large-form" [formGroup]="emailForm">
+        <ng-template matStepLabel>Enter your email</ng-template>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Email" formControlName="email" required>
+        </mat-form-field>
+        <mat-error *ngIf="emailForm.get('email').hasError('required') && emailForm.dirty">
+          An email address is required
+        </mat-error>
+        <mat-error *ngIf="emailForm.get('email').invalid && !emailForm.get('email').hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <div>
+          <button mat-button matStepperPrevious type="button">Back</button>
+          <button mat-button matStepperNext type="button">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="phoneForm">
+      <form class="large-form" [formGroup]="phoneForm">
+        <ng-template matStepLabel>Enter your phone number</ng-template>
+        <mat-form-field>
+          <mat-select placeholder="Country code" formControlName="countryCode" required>
+            <mat-option *ngFor="let code of countryCodes" [value]="code">
+              {{ code }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput type="tel" placeholder="Phone number" formControlName="phone" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious type="button">Back</button>
+          <button mat-button matStepperNext type="button">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="passwordForm">
+      <form class="large-form" [formGroup]="passwordForm">
+        <ng-template matStepLabel>Enter a password</ng-template>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Password" required [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious type="button">Back</button>
+          <button mat-button (click)="onSignUp()">Submit</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </form>
+      <mat-error *ngIf="errorMessage">
+        {{errorMessage}}
+      </mat-error>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

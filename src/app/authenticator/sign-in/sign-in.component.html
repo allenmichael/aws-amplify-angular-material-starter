@@ -1,0 +1,23 @@
+<div *ngIf="showSignIn">
+  <form class="large-form" [formGroup]="signInForm">
+    <mat-form-field class="full-width-input" appearance="standard">
+      <input formControlName="username" type="text" matInput placeholder="Username" value="{{username}}" required>
+    </mat-form-field>
+    <mat-form-field class="full-width-input" appearance="standard">
+      <input matInput formControlName="password" placeholder="Enter your password" [type]="hidePassword ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+    <mat-error *ngIf="errorMessage">
+      {{errorMessage}}
+    </mat-error>
+    <div>
+    </div>
+    <div class="push-right">
+      <button mat-button (click)="onSignIn()">Sign In</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="!showSignIn">
+  <p>You are currently signed in.</p>
+</div>
+
